@@ -82,6 +82,7 @@ class WarmupOverlayExample extends StatelessWidget {
       animations: [
         WarmupAnimation(
           builder: (context, complete) {
+            // Replace with your animation of choice
             return OpenContainerAnimation(onComplete: complete);
           },
           repeat: 4,
@@ -98,6 +99,7 @@ class WarmupRoutineExample extends StatelessWidget {
       animations: [
         WarmupAnimation(
           builder: (context, complete) {
+            // Replace with your animation of choice
             return OpenContainerAnimation(onComplete: complete);
           },
           repeat: 4,

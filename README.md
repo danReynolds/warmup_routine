@@ -1,14 +1,63 @@
 # warmup_routine
 
-A new Flutter package project.
+A library for handling animation warmup generically as discussed in: https://github.com/flutter/flutter/issues/76180
 
-## Getting Started
+This solution is not very scalable for applications with many animations to warm up and is meant mostly as an example of an approach applications could take
+to warmup their animations until a more permanent solution is available.
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
+## Usage
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+### Warmup overlay
+
+The most common way to warmup animations is to use a pseudo splash screen that executes the animations while the application is starting up.
+
+```dart
+import 'package:warmup_routine/warmup_overlay.dart';
+import 'package:warmup_routine/warmup_animation.dart';
+
+class WarmupOverlayExample extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return WarmupOverlay(
+      onComplete: () {
+        // Start rest of application
+      },
+      animations: [
+        WarmupAnimation(
+          builder: (context, complete) {
+            return OpenContainerAnimation(onComplete: complete);
+          },
+          repeat: 4,
+        ),
+      ],
+    );
+  }
+}
+```
+
+### Warmup routine
+
+If an overlay is not desired, a warmup routine can be executed anywhere in your existing directly:
+
+```dart
+class WarmupRoutineExample extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return WarmupRoutine(
+      animations: [
+        WarmupAnimation(
+          builder: (context, complete) {
+            // Replace with your animation of choice
+            return OpenContainerAnimation(onComplete: complete);
+          },
+          repeat: 4,
+        ),
+      ],
+      onComplete: () {
+        // Start rest of application
+      },
+    );
+  }
+}
+
+```
