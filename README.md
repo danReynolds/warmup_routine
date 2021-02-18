@@ -19,17 +19,18 @@ class WarmupOverlayExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WarmupOverlay(
-      onComplete: () {
-        // Start rest of application
-      },
       animations: [
         WarmupAnimation(
           builder: (context, complete) {
+            // Replace with your animation of choice
             return OpenContainerAnimation(onComplete: complete);
           },
           repeat: 4,
         ),
       ],
+      onComplete: () {
+        // Start rest of application
+      },
     );
   }
 }
@@ -59,5 +60,6 @@ class WarmupRoutineExample extends StatelessWidget {
     );
   }
 }
-
 ```
+
+Full example in [GitHub repo](https://github.com/danReynolds/warmup_routine/blob/master/example.dart)
