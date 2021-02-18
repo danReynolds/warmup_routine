@@ -79,6 +79,13 @@ class WarmupOverlayExample extends StatelessWidget {
       onComplete: () {
         // Start rest of application
       },
+      builder: (context) {
+        return Container(
+          child: Center(
+            child: CircularProgressIndicator(),
+          ),
+        );
+      },
       animations: [
         WarmupAnimation(
           builder: (context, complete) {
