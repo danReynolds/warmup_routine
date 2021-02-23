@@ -55,8 +55,8 @@ class _WarmupOverlayState extends State<WarmupOverlay> {
     return WarmupRoutine(
       animations: widget.animations,
       onComplete: () {
-        _entry.remove();
         widget.onComplete();
+        _entry.remove();
       },
     );
   }
