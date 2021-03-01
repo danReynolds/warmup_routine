@@ -73,30 +73,43 @@ class _OpenContainerAnimationState extends State<OpenContainerAnimation> {
 }
 
 // Example of showing an overlay under which the animations are executing.
-class WarmupOverlayExample extends StatelessWidget {
+class WarmupOverlayExample extends StatefulWidget {
+  _WarmupOverlayExampleState createState() => _WarmupOverlayExampleState();
+}
+
+class _WarmupOverlayExampleState extends State<WarmupOverlayExample> {
+  bool _shouldShowOverlay = true;
+
   @override
   Widget build(BuildContext context) {
-    return WarmupOverlay(
-      onComplete: () {
-        // Start rest of application
-      },
-      builder: (context) {
-        return Container(
-          child: Center(
-            child: CircularProgressIndicator(),
+    if (_shouldShowOverlay) {
+      return WarmupOverlay(
+        onComplete: () {
+          setState(() {
+            _shouldShowOverlay = false;
+          });
+        },
+        builder: (context) {
+          return Container(
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        },
+        animations: [
+          WarmupAnimation(
+            builder: (context, complete) {
+              // Replace with your animation of choice
+              return OpenContainerAnimation(onComplete: complete);
+            },
+            repeat: 4,
           ),
-        );
-      },
-      animations: [
-        WarmupAnimation(
-          builder: (context, complete) {
-            // Replace with your animation of choice
-            return OpenContainerAnimation(onComplete: complete);
-          },
-          repeat: 4,
-        ),
-      ],
-    );
+        ],
+      );
+    }
+  } else {
+    // Start rest of application
+    MyApp();
   }
 }
 

@@ -15,23 +15,44 @@ The most common way to warmup animations is to use a pseudo splash screen that e
 import 'package:warmup_routine/warmup_overlay.dart';
 import 'package:warmup_routine/warmup_animation.dart';
 
-class WarmupOverlayExample extends StatelessWidget {
+// Example of showing an overlay under which the animations are executing.
+class WarmupOverlayExample extends StatefulWidget {
+  _WarmupOverlayExampleState createState() => _WarmupOverlayExampleState();
+}
+
+class _WarmupOverlayExampleState extends State<WarmupOverlayExample> {
+  bool _shouldShowOverlay = true;
+
   @override
   Widget build(BuildContext context) {
-    return WarmupOverlay(
-      animations: [
-        WarmupAnimation(
-          builder: (context, complete) {
-            // Replace with your animation of choice
-            return OpenContainerAnimation(onComplete: complete);
-          },
-          repeat: 4,
-        ),
-      ],
-      onComplete: () {
-        // Start rest of application
-      },
-    );
+    if (_shouldShowOverlay) {
+      return WarmupOverlay(
+        onComplete: () {
+          setState(() {
+            _shouldShowOverlay = false;
+          });
+        },
+        builder: (context) {
+          return Container(
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        },
+        animations: [
+          WarmupAnimation(
+            builder: (context, complete) {
+              // Replace with your animation of choice
+              return OpenContainerAnimation(onComplete: complete);
+            },
+            repeat: 4,
+          ),
+        ],
+      );
+    }
+  } else {
+    // Start rest of application
+    MyApp();
   }
 }
 ```
