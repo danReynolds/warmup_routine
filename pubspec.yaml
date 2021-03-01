@@ -1,6 +1,6 @@
 name: warmup_routine
 description: A general purpose wrapper for warming up animations.
-version: 0.0.4
+version: 0.0.6
 homepage: https://github.com/danReynolds/warmup_routine
 
 environment:
