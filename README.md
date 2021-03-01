@@ -64,7 +64,7 @@ class WarmupRoutineExample extends StatelessWidget {
 
 ### Navigator example
 
-```
+```dart
 // The overlay will remain on top of the application above navigation events, so Navigator.push/pop
 // can be warmed up as well:
 
