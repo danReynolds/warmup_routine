@@ -1,3 +1,7 @@
+## Update:
+
+The iOS jank issue relating to shader warmup is now largely mitigated by shader pre-compilation as described [https://github.com/flutter/flutter/issues/79298?fbclid=IwAR2Mmv5QnZUSRw7uDaa21unLCt-QXTv8pv3C0VBcw9iv_Mb2RX7pMhzGIQQ](here). Huge thanks to the Flutter team!
+
 # warmup_routine
 
 A library for handling animation warmup generically as discussed in: https://github.com/flutter/flutter/issues/76180
