@@ -106,10 +106,10 @@ class _WarmupOverlayExampleState extends State<WarmupOverlayExample> {
           ),
         ],
       );
+    } else {
+      // Start rest of application
+      return MyApp();
     }
-  } else {
-    // Start rest of application
-    MyApp();
   }
 }
 
@@ -206,5 +206,19 @@ class WarmupOverlayNavigationExample extends StatelessWidget {
         ),
       ],
     );
+  }
+}
+
+class YourWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }

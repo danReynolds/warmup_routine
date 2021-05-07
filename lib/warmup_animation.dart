@@ -8,7 +8,7 @@ class WarmupAnimationData extends InheritedWidget {
     @required this.onComplete,
     @required Widget child,
   })  : assert(child != null),
-        super(child: child);
+        super();
 
   final Function onComplete;
 
