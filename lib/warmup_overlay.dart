@@ -4,13 +4,13 @@ import './warmup_routine.dart';
 
 class WarmupOverlay extends StatefulWidget {
   final Function onComplete;
-  final Widget Function(BuildContext context) placeholderBuilder;
-  final Widget Function(BuildContext context) builder;
+  final Widget Function(BuildContext context)? placeholderBuilder;
+  final Widget Function(BuildContext context)? builder;
   final List<WarmupAnimation> animations;
 
   WarmupOverlay({
-    @required this.onComplete,
-    @required this.animations,
+    required this.onComplete,
+    required this.animations,
     this.placeholderBuilder,
     this.builder,
   });
@@ -19,7 +19,7 @@ class WarmupOverlay extends StatefulWidget {
 }
 
 class _WarmupOverlayState extends State<WarmupOverlay> {
-  OverlayEntry _entry;
+  OverlayEntry? _entry;
 
   // The overlay cannot be fully opaque or the animation won't actually
   // cache the shaders.
@@ -29,19 +29,19 @@ class _WarmupOverlayState extends State<WarmupOverlay> {
   initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
       setState(() {
         _entry = OverlayEntry(
           opaque: false,
           builder: (BuildContext overlayContext) {
             return Opacity(
               opacity: _overlayOpacity,
-              child: widget.builder(overlayContext),
+              child: widget.builder!(overlayContext),
             );
           },
         );
       });
-      Overlay.of(context).insert(_entry);
+      Overlay.of(context)!.insert(_entry!);
     });
   }
 
@@ -50,13 +50,13 @@ class _WarmupOverlayState extends State<WarmupOverlay> {
     if (_entry == null) {
       return widget.placeholderBuilder == null
           ? Container()
-          : widget.placeholderBuilder(context);
+          : widget.placeholderBuilder!(context);
     }
     return WarmupRoutine(
       animations: widget.animations,
       onComplete: () {
         widget.onComplete();
-        _entry.remove();
+        _entry!.remove();
       },
     );
   }
