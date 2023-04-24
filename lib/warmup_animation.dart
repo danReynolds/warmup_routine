@@ -5,33 +5,31 @@ import 'package:flutter/material.dart';
 
 class WarmupAnimationData extends InheritedWidget {
   const WarmupAnimationData({
-    @required this.onComplete,
-    @required Widget child,
-  })  : assert(child != null),
-        super(child: child);
+    required this.onComplete,
+    required Widget child,
+  }) : super(child: child);
 
   final Function onComplete;
 
-  static WarmupAnimationData of(BuildContext context) {
+  static WarmupAnimationData? of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<WarmupAnimationData>();
   }
 
   @override
-  bool updateShouldNotify(WarmupAnimationData old) =>
-      onComplete != old.onComplete || child != old.child;
+  bool updateShouldNotify(WarmupAnimationData old) => onComplete != old.onComplete || child != old.child;
 }
 
 class WarmupAnimation extends StatefulWidget {
   final Widget Function(BuildContext context, Function() complete) builder;
   final int repeat;
 
-  WarmupAnimation({@required this.builder, this.repeat = 1});
+  WarmupAnimation({required this.builder, this.repeat = 1});
 
   _WarmupAnimationState createState() => _WarmupAnimationState();
 }
 
 class _WarmupAnimationState extends State<WarmupAnimation> {
-  int _repeat;
+  int _repeat = 1;
 
   @override
   initState() {
@@ -57,7 +55,7 @@ class _WarmupAnimationState extends State<WarmupAnimation> {
         final warmupAnimationData = WarmupAnimationData.of(innerContext);
         return widget.builder(
           innerContext,
-          () => _onComplete(warmupAnimationData.onComplete),
+          () => _onComplete(warmupAnimationData!.onComplete),
         );
       },
     );

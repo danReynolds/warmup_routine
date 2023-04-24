@@ -7,20 +7,20 @@ import './lib/warmup_routine.dart';
 class OpenContainerAnimation extends StatefulWidget {
   final Function onComplete;
 
-  OpenContainerAnimation({@required this.onComplete});
+  OpenContainerAnimation({required this.onComplete});
 
   _OpenContainerAnimationState createState() => _OpenContainerAnimationState();
 }
 
 class _OpenContainerAnimationState extends State<OpenContainerAnimation> {
-  Function _openContainerAnimationStart;
-  Function _openContainerAnimationEnd;
+  late Function _openContainerAnimationStart;
+  late Function _openContainerAnimationEnd;
 
   @override
   initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
       _openContainerAnimationStart();
       Future.delayed(
         Duration(milliseconds: 400),
@@ -106,10 +106,10 @@ class _WarmupOverlayExampleState extends State<WarmupOverlayExample> {
           ),
         ],
       );
+    } else {
+      // Start rest of application
+      return MyApp();
     }
-  } else {
-    // Start rest of application
-    MyApp();
   }
 }
 
@@ -141,7 +141,7 @@ class WarmupRoutineExample extends StatelessWidget {
 class NavigationWarmupScreen extends StatefulWidget {
   final Function onComplete;
 
-  NavigationWarmupScreen({@required this.onComplete});
+  NavigationWarmupScreen({required this.onComplete});
 
   _NavigationWarmupScreenState createState() => _NavigationWarmupScreenState();
 }
@@ -150,7 +150,7 @@ class _NavigationWarmupScreenState extends State<NavigationWarmupScreen> {
   initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -206,5 +206,19 @@ class WarmupOverlayNavigationExample extends StatelessWidget {
         ),
       ],
     );
+  }
+}
+
+class YourWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }

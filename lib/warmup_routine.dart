@@ -7,7 +7,7 @@ class WarmupRoutine extends StatefulWidget {
   final List<WarmupAnimation> animations;
   final void Function() onComplete;
 
-  WarmupRoutine({@required this.animations, @required this.onComplete});
+  WarmupRoutine({required this.animations, required this.onComplete});
 
   _WarmupAnimationState createState() => _WarmupAnimationState();
 }
